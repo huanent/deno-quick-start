@@ -1,15 +1,4 @@
-import { join, dirname } from "path";
+import { dirname } from "path";
 
-export const isDev = (() => {
-  try {
-    Deno.statSync(join(Deno.cwd(), "deno.jsonc"));
-    return true;
-  } catch {
-    return false;
-  }
-})();
-
-export const basePath = (() => {
-  if (isDev) return Deno.cwd();
-  return dirname(Deno.execPath());
-})();
+export const isDev = Deno.env.get("DENO_ENV") == "development";
+export const basePath = isDev ? Deno.cwd() : dirname(Deno.execPath());

@@ -10,7 +10,7 @@
             "type": "pwa-node",
             "program": "${workspaceFolder}/src/main.ts",
             "cwd": "${workspaceFolder}",
-            "runtimeExecutable": "/Users/huanent/.deno/bin/deno",
+            "runtimeExecutable": "${userHome}/.deno/bin/deno",
             "runtimeArgs": [
                 "run",
                 "--unstable",
