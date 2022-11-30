@@ -1,9 +1,9 @@
 {
     "imports": {
-        "path": "https://deno.land/std@0.158.0/path/mod.ts",
-        "fs": "https://deno.land/std@0.158.0/fs/mod.ts",
+        "path": "https://deno.land/std@0.166.0/path/mod.ts",
+        "fs": "https://deno.land/std@0.166.0/fs/mod.ts",
         "asserts": "https://deno.land/std@0.159.0/testing/asserts.ts",
-        "dotenv": "https://deno.land/std@0.165.0/dotenv/mod.ts",
-        "log": "https://deno.land/std@0.165.0/log/mod.ts"
+        "dotenv": "https://deno.land/std@0.166.0/dotenv/mod.ts",
+        "log": "https://deno.land/std@0.166.0/log/mod.ts"
     }
 }

@@ -1,27 +1,36 @@
 import * as log from "log";
 import { join } from "path"
+import { ensureDirSync } from "fs"
 import { basePath } from "./env.ts"
 
+const logDir = join(basePath, "logs");
+const logPath = join(logDir, "log.txt");
+ensureDirSync(logDir)
+
+const fileHandler = new log.handlers.RotatingFileHandler("INFO", {
+  filename: logPath,
+  formatter: "{levelName} {loggerName} {datetime} {msg}",
+  maxBytes: 1024 * 1024 * 1,
+  maxBackupCount: 100
+})
 
 log.setup({
   handlers: {
     console: new log.handlers.ConsoleHandler("DEBUG"),
-
-    file: new log.handlers.FileHandler("WARNING", {
-      filename: join(basePath, "log.txt"),
-      formatter: "{levelName} {loggerName} {datetime} {msg}",
-    }),
+    file: fileHandler
   },
-
   loggers: {
-    // configure default logger available via short-hand methods above.
     default: {
       level: "DEBUG",
+      handlers: ["console", "file"],
+    },
+    system: {
+      level: "INFO",
       handlers: ["console", "file"],
     }
   },
 });
 
-export function getLogger(name?: string) {
-  return log.getLogger(name);
-}
+export const getLogger = log.getLogger
+export const flushLog = () => fileHandler.flush()
+export const systemLogger = getLogger("system")
